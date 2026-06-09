@@ -1,8 +1,12 @@
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { createClient } from "./helpers.ts";
 
 beforeEach(() => {
-	vi.spyOn(globalThis, "fetch").mockReset();
+	vi.stubGlobal("fetch", vi.fn());
+});
+
+afterEach(() => {
+	vi.unstubAllGlobals();
 });
 
 describe("MaxoptraClient", () => {

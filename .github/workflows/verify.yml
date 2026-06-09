@@ -24,10 +24,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Check Formatting
-        run: pnpm exec biome check --linter-enabled=false --organize-imports-enabled=false .
-
-      - name: Lint
-        run: pnpm exec biome check --formatter-enabled=false .
+        run: pnpm exec biome check .
 
       - name: Type Check
         run: pnpm run build

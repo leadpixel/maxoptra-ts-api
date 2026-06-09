@@ -90,11 +90,11 @@ export const SubscriptionLogSchema = withDataArray(SubscriptionLogEntrySchema);
 
 export const CustomerLocationSchema = z.object({
 	referenceNumber: z.string(),
-	name: z.string().optional(),
-	address: z.string().optional(),
-	latitude: z.number().optional(),
-	longitude: z.number().optional(),
-	w3wAddress: z.string().optional(),
+	name: z.string().nullable().optional(),
+	address: z.string().nullable().optional(),
+	latitude: z.number().nullable().optional(),
+	longitude: z.number().nullable().optional(),
+	w3wAddress: z.string().nullable().optional(),
 });
 
 export const WidgetTrackingSchema = z.object({
@@ -104,32 +104,32 @@ export const WidgetTrackingSchema = z.object({
 
 export const OrderSummarySchema = z.object({
 	referenceNumber: z.string(),
-	consignmentReference: z.string().optional(),
+	consignmentReference: z.string().nullable().optional(),
 	distributionCentreReference: z.string(),
-	distributionCentreName: z.string().optional(),
-	task: z.enum(["DELIVERY", "COLLECTION"]).optional(),
-	priority: z.enum(["NORMAL", "MEDIUM", "HIGH"]).optional(),
-	clientName: z.string().optional(),
-	contactPerson: z.string().optional(),
+	distributionCentreName: z.string().nullable().optional(),
+	task: z.enum(["DELIVERY", "COLLECTION"]).nullable().optional(),
+	priority: z.enum(["NORMAL", "MEDIUM", "HIGH"]).nullable().optional(),
+	clientName: z.string().nullable().optional(),
+	contactPerson: z.string().nullable().optional(),
 	customerLocation: CustomerLocationSchema,
-	capacity1: z.number().optional(),
-	capacity2: z.number().optional(),
-	operationDuration: z.number().optional(),
-	customFields: z.record(z.string(), z.string()).optional(),
-	status: z.string().optional(),
-	statusLastUpdated: z.string().optional(),
-	widgetTrackingDetails: WidgetTrackingSchema.optional(),
+	capacity1: z.number().nullable().optional(),
+	capacity2: z.number().nullable().optional(),
+	operationDuration: z.number().nullable().optional(),
+	customFields: z.record(z.string(), z.string()).nullable().optional(),
+	status: z.string().nullable().optional(),
+	statusLastUpdated: z.string().nullable().optional(),
+	widgetTrackingDetails: WidgetTrackingSchema.nullable().optional(),
 });
 export type OrderSummary = z.infer<typeof OrderSummarySchema>;
 
 export const PaginatedOrdersSchema = z.object({
 	offset: z.number(),
 	_links: z.object({
-		prev: z.string().optional(),
-		next: z.string().optional(),
-		first: z.string().optional(),
-		last: z.string().optional(),
-		self: z.string().optional(),
+		prev: z.string().nullable().optional(),
+		next: z.string().nullable().optional(),
+		first: z.string().nullable().optional(),
+		last: z.string().nullable().optional(),
+		self: z.string().nullable().optional(),
 	}),
 	data: z.array(OrderSummarySchema),
 });
@@ -319,18 +319,18 @@ export type OrderDeleteResponse = z.infer<typeof OrderDeleteResponseSchema>;
 export const DriverSummarySchema = z.object({
 	referenceNumber: z.string(),
 	name: z.string(),
-	assignedVehicleReference: z.string().optional(),
-	assignedVehicleName: z.string().optional(),
-	distributionCentreReference: z.string().optional(),
-	distributionCentreName: z.string().optional(),
+	assignedVehicleReference: z.string().nullable().optional(),
+	assignedVehicleName: z.string().nullable().optional(),
+	distributionCentreReference: z.string().nullable().optional(),
+	distributionCentreName: z.string().nullable().optional(),
 });
 export type DriverSummary = z.infer<typeof DriverSummarySchema>;
 
 export const DriversListSchema = z.object({
 	offset: z.number(),
 	_links: z.object({
-		prev: z.string().optional(),
-		next: z.string().optional(),
+		prev: z.string().nullable().optional(),
+		next: z.string().nullable().optional(),
 	}),
 	data: z.array(DriverSummarySchema),
 });
@@ -384,22 +384,22 @@ export type DriverCreateRequest = z.infer<typeof DriverCreateSchema>;
 
 export const VehicleSummarySchema = z.object({
 	referenceNumber: z.string(),
-	name: z.string().optional(),
-	capacity1: z.number().optional(),
-	capacity2: z.number().optional(),
-	distributionCentreReference: z.string().optional(),
-	distributionCentreName: z.string().optional(),
-	vehicleTypeReference: z.string().optional(),
-	assignedDriverReference: z.string().optional(),
-	assignedDriverName: z.string().optional(),
+	name: z.string().nullable().optional(),
+	capacity1: z.number().nullable().optional(),
+	capacity2: z.number().nullable().optional(),
+	distributionCentreReference: z.string().nullable().optional(),
+	distributionCentreName: z.string().nullable().optional(),
+	vehicleTypeReference: z.string().nullable().optional(),
+	assignedDriverReference: z.string().nullable().optional(),
+	assignedDriverName: z.string().nullable().optional(),
 });
 export type VehicleSummary = z.infer<typeof VehicleSummarySchema>;
 
 export const VehiclesListSchema = z.object({
 	offset: z.number(),
 	_links: z.object({
-		prev: z.string().optional(),
-		next: z.string().optional(),
+		prev: z.string().nullable().optional(),
+		next: z.string().nullable().optional(),
 	}),
 	data: z.array(VehicleSummarySchema),
 });
@@ -447,26 +447,26 @@ export type VehicleCreateRequest = z.infer<typeof VehicleCreateSchema>;
 // ── Locations ────────────────────────────────────────────────────────
 
 export const LocationSummarySchema = z.object({
-	referenceNumber: z.string(),
-	name: z.string().optional(),
+	referenceNumber: z.string().nullable().optional(),
+	name: z.string().nullable().optional(),
 	address: z.string(),
-	w3wAddress: z.string().optional(),
-	postcode: z.string().optional(),
-	latitude: z.number().optional(),
-	longitude: z.number().optional(),
-	clientName: z.string().optional(),
-	isVerified: z.boolean().optional(),
-	isValid: z.boolean().optional(),
-	created: z.string().optional(),
-	updated: z.string().optional(),
+	w3wAddress: z.string().nullable().optional(),
+	postcode: z.string().nullable().optional(),
+	latitude: z.number().nullable().optional(),
+	longitude: z.number().nullable().optional(),
+	clientName: z.string().nullable().optional(),
+	isVerified: z.boolean().nullable().optional(),
+	isValid: z.boolean().nullable().optional(),
+	created: z.string().nullable().optional(),
+	updated: z.string().nullable().optional(),
 });
 export type LocationSummary = z.infer<typeof LocationSummarySchema>;
 
 export const LocationsListSchema = z.object({
 	offset: z.number(),
 	_links: z.object({
-		prev: z.string().optional(),
-		next: z.string().optional(),
+		prev: z.string().nullable().optional(),
+		next: z.string().nullable().optional(),
 	}),
 	data: z.array(LocationSummarySchema),
 });
@@ -540,8 +540,8 @@ export type DistributionCentre = z.infer<typeof DistributionCentreSchema>;
 export const DistributionCentresListSchema = z.object({
 	offset: z.number(),
 	_links: z.object({
-		prev: z.string().optional(),
-		next: z.string().optional(),
+		prev: z.string().nullable().optional(),
+		next: z.string().nullable().optional(),
 	}),
 	data: z.array(DistributionCentreSchema),
 });

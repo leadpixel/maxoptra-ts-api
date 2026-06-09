@@ -41,8 +41,8 @@ async function runDemo() {
 		if (drivers.data.length > 0) {
 			console.table(
 				drivers.data.slice(0, 5).map((d) => ({
-					Ref: d.referenceNumber,
-					Name: d.name,
+					ref: d.referenceNumber,
+					name: d.name,
 				})),
 			);
 		}
@@ -53,8 +53,8 @@ async function runDemo() {
 		if (vehicles.data.length > 0) {
 			console.table(
 				vehicles.data.slice(0, 5).map((v) => ({
-					Ref: v.referenceNumber,
-					Name: v.name || "N/A",
+					ref: v.referenceNumber,
+					name: v.name || "N/A",
 				})),
 			);
 		}
@@ -65,9 +65,9 @@ async function runDemo() {
 		if (locations.data.length > 0) {
 			console.table(
 				locations.data.slice(0, 5).map((l) => ({
-					Ref: l.referenceNumber || "N/A",
-					Name: l.name || "N/A",
-					Address: `${l.address.substring(0, 30)}...`,
+					ref: l.referenceNumber || "N/A",
+					name: l.name || "N/A",
+					address: `${l.address.substring(0, 30)}...`,
 				})),
 			);
 		}
@@ -78,8 +78,8 @@ async function runDemo() {
 		if (orders.data.length > 0) {
 			console.table(
 				orders.data.slice(0, 5).map((o) => ({
-					Ref: o.referenceNumber,
-					Status: o.status || "N/A",
+					ref: o.referenceNumber,
+					status: o.status || "N/A",
 				})),
 			);
 		}

@@ -9,7 +9,30 @@
 	"linter": {
 		"enabled": true,
 		"rules": {
-			"recommended": true
+			"recommended": true,
+			"complexity": {
+				"noExcessiveCognitiveComplexity": "error",
+				"useLiteralKeys": "error"
+			},
+			"correctness": {
+				"noUnusedVariables": "error",
+				"noUnusedImports": "error"
+			},
+			"style": {
+				"noDefaultExport": "error",
+				"noNonNullAssertion": "error",
+				"noShoutyConstants": "error",
+				"useNamingConvention": {
+					"level": "error",
+					"options": {
+						"strictCase": false
+					}
+				}
+			},
+			"suspicious": {
+				"noExplicitAny": "error",
+				"noShadowRestrictedNames": "error"
+			}
 		}
 	},
 	"formatter": {

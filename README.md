@@ -214,6 +214,16 @@ E2E tests run against the [Stoplight mock server](https://maxoptra.stoplight.io/
 E2E=true pnpm test
 ```
 
+### Running Live Integration tests
+
+Live integration tests run against the real Maxoptra API and require `MAXOPTRA_API_KEY` and `MAXOPTRA_BASE_URL`:
+
+```bash
+MAXOPTRA_API_KEY=your-key MAXOPTRA_BASE_URL=https://your-domain.maxoptra.com/api/v6 pnpm test
+```
+
+These tests are read-only and will not modify any data.
+
 ## Contributing
 
 Contributions are welcome. Please ensure your code follows the established linting and formatting standards.

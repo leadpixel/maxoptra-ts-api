@@ -18,6 +18,11 @@ format:
 test:
     pnpm run test
 
+# Run all pre-release checks
+[private]
+pre-release: lint build test
+    @echo "✅ Pre-release checks passed."
+
 # Clean build artifacts
 clean:
     rm -rf dist

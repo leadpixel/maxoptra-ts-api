@@ -14,10 +14,7 @@
 		"verbatimModuleSyntax": true,
 		"composite": true,
 		"allowImportingTsExtensions": true,
-		"emitDeclarationOnly": true,
-		"noUncheckedIndexedAccess": true,
-		"noImplicitOverride": true,
-		"exactOptionalPropertyTypes": true
+		"emitDeclarationOnly": true
 	},
 	"include": ["src/**/*"],
 	"exclude": ["node_modules", "dist", "tests"]

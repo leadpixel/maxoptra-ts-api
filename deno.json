@@ -1,4 +1,6 @@
 {
+	"name": "@leadpixel/maxoptra",
+	"version": "1.0.0",
 	"imports": {
 		"./client.ts": "./src/client.ts",
 		"./resources/async.ts": "./src/resources/async.ts",

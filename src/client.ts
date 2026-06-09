@@ -17,10 +17,24 @@ export interface MaxoptraConfig {
 export class MaxoptraError extends Error {
 	public status: number;
 	public statusText: string;
-	public data: any;
+	public data: unknown;
 
-	constructor(status: number, statusText: string, data: any) {
-		super(`Maxoptra API error [${status}]: ${data?.error || data?.message || statusText}`);
+	constructor(status: number, statusText: string, data: unknown) {
+		let message = statusText;
+
+		if (data && typeof data === "object") {
+			const d = data as Record<string, unknown>;
+			const errorVal = d["error"];
+			const messageVal = d["message"];
+
+			if (typeof errorVal === "string") {
+				message = errorVal;
+			} else if (typeof messageVal === "string") {
+				message = messageVal;
+			}
+		}
+
+		super(`Maxoptra API error [${status}]: ${message}`);
 		this.status = status;
 		this.statusText = statusText;
 		this.data = data;

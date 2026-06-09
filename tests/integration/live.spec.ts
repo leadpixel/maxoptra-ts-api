@@ -6,7 +6,7 @@ const baseUrl = process.env.MAXOPTRA_BASE_URL?.trim();
 
 describe.runIf(apiKey)("Maxoptra Live Integration (Read-only)", () => {
 	const client = new MaxoptraClient({
-		apiKey: apiKey!,
+		apiKey: apiKey ?? "",
 		baseUrl: baseUrl,
 	});
 

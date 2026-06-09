@@ -9,5 +9,5 @@ const deno = JSON.parse(readFileSync(denoPath, "utf-8"));
 
 deno.version = pkg.version;
 
-writeFileSync(denoPath, JSON.stringify(deno, null, "\t") + "\n");
+writeFileSync(denoPath, `${JSON.stringify(deno, null, "\t")}\n`);
 console.log(`✅ Synchronised deno.json version to ${pkg.version}`);

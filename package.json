@@ -6,6 +6,36 @@
 	"author": "",
 	"type": "module",
 	"main": "./dist/index.js",
+	"module": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"files": [
+	  "dist",
+	  "README.md",
+	  "LICENSE"
+	],
+	"exports": {
+	  ".": {
+	    "types": "./dist/index.d.ts",
+	    "import": "./dist/index.js"
+	  }
+	},
+	"repository": {
+	  "type": "git",
+	  "url": "git+https://github.com/leadpixel/maxoptra.git"
+	},
+	"bugs": {
+	  "url": "https://github.com/leadpixel/maxoptra/issues"
+	},
+	"homepage": "https://github.com/leadpixel/maxoptra#readme",
+	"keywords": [
+	  "maxoptra",
+	  "api",
+	  "logistics",
+	  "route-optimization",
+	  "transport",
+	  "client",
+	  "typescript"
+	],
 	"scripts": {
 		"test": "vitest run",
 		"build": "tsc",

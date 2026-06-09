@@ -1,6 +1,6 @@
-import { MaxoptraClient } from "../src/index.ts";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
+import { MaxoptraClient } from "../src/index.ts";
 
 // Simple .env parser for the demo
 function loadEnv() {
@@ -13,7 +13,7 @@ function loadEnv() {
 				process.env[key.trim()] = valueParts.join("=").trim();
 			}
 		}
-	} catch (e) {
+	} catch (_e) {
 		console.warn("Could not load .env file, using existing environment variables.");
 	}
 }
@@ -31,7 +31,7 @@ async function runDemo() {
 
 	console.log("🚀 Initialising Maxoptra Client...");
 	console.log(`📍 Base URL: ${baseUrl || "https://api.maxoptra.com/api/v6"}`);
-	
+
 	const client = new MaxoptraClient({ apiKey, baseUrl });
 
 	try {
@@ -39,43 +39,50 @@ async function runDemo() {
 		const drivers = await client.drivers.list();
 		console.log(`✅ Found ${drivers.data.length} drivers.`);
 		if (drivers.data.length > 0) {
-			console.table(drivers.data.slice(0, 5).map(d => ({ 
-				Ref: d.referenceNumber, 
-				Name: d.name 
-			})));
+			console.table(
+				drivers.data.slice(0, 5).map((d) => ({
+					Ref: d.referenceNumber,
+					Name: d.name,
+				})),
+			);
 		}
 
 		console.log("\n🚛 Fetching Vehicles...");
 		const vehicles = await client.vehicles.list();
 		console.log(`✅ Found ${vehicles.data.length} vehicles.`);
 		if (vehicles.data.length > 0) {
-			console.table(vehicles.data.slice(0, 5).map(v => ({ 
-				Ref: v.referenceNumber, 
-				Name: v.name || "N/A" 
-			})));
+			console.table(
+				vehicles.data.slice(0, 5).map((v) => ({
+					Ref: v.referenceNumber,
+					Name: v.name || "N/A",
+				})),
+			);
 		}
 
 		console.log("\n📍 Fetching Locations...");
 		const locations = await client.locations.list();
 		console.log(`✅ Found ${locations.data.length} locations.`);
 		if (locations.data.length > 0) {
-			console.table(locations.data.slice(0, 5).map(l => ({ 
-				Ref: l.referenceNumber || "N/A", 
-				Name: l.name || "N/A",
-				Address: l.address.substring(0, 30) + "..."
-			})));
+			console.table(
+				locations.data.slice(0, 5).map((l) => ({
+					Ref: l.referenceNumber || "N/A",
+					Name: l.name || "N/A",
+					Address: `${l.address.substring(0, 30)}...`,
+				})),
+			);
 		}
 
 		console.log("\n📋 Fetching Open Orders...");
 		const orders = await client.orders.list({ status: "open" });
 		console.log(`✅ Found ${orders.data.length} open orders.`);
 		if (orders.data.length > 0) {
-			console.table(orders.data.slice(0, 5).map(o => ({ 
-				Ref: o.referenceNumber, 
-				Status: o.status || "N/A"
-			})));
+			console.table(
+				orders.data.slice(0, 5).map((o) => ({
+					Ref: o.referenceNumber,
+					Status: o.status || "N/A",
+				})),
+			);
 		}
-
 	} catch (error) {
 		console.error("\n❌ Error during demo:");
 		if (error instanceof Error) {

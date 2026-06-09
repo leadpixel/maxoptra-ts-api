@@ -1,60 +1,36 @@
 # Releasing @leadpixel/maxoptra
 
-This project follows a "Build -> Verify -> Tag -> Publish" deployment pattern.
+This project uses an automated "Push-to-Publish" pattern via GitHub Actions.
 
-## 1. Local Preparation
-Ensure your local environment is clean and up to date.
+## 1. Prerequisites
+- Ensure you have the `NPM_TOKEN` secret configured in your GitHub repository.
+- Your local `main` branch should be up to date.
+
+## 2. Release Command
+To trigger a release, use the `npm version` command. This will:
+1. Run pre-release checks.
+2. Bump the version in `package.json`.
+3. Synchronise the version in `deno.json`.
+4. Create a Git commit and a tag (e.g., `v1.0.1`).
 
 ```bash
-# Get latest changes
-git checkout main
-git pull origin main
-
-# Install fresh dependencies
-pnpm install
+# Choose the appropriate bump:
+npm version patch # 1.0.0 -> 1.0.1
+npm version minor # 1.0.0 -> 1.1.0
+npm version major # 1.0.0 -> 2.0.0
 ```
 
-## 2. Automated Quality Check
-Before bumping the version, ensure everything is perfect.
+## 3. Push to GitHub
+Push the new commit and the tag to GitHub.
 
 ```bash
-# Run lint, format, type-check, and all tests (including mocked E2E)
-just lint
-just test
-```
-
-## 3. Version Bump
-Use `npm version` to update `package.json` and create a git tag. Use [Semantic Versioning](https://semver.org/).
-
-```bash
-# Choose one:
-npm version patch # Bug fixes (1.0.0 -> 1.0.1)
-npm version minor # New features (1.0.0 -> 1.1.0)
-npm version major # Breaking changes (1.0.0 -> 2.0.0)
-```
-
-**Note:** After running this, manually update the `version` in `deno.json` to match.
-
-## 4. Final Build
-Generate the distribution files that will actually be uploaded to npm.
-
-```bash
-just clean
-just build
-```
-
-## 5. Publishing
-Push your changes and publish the package.
-
-```bash
-# Push the commit and the new tag
 git push origin main --tags
-
-# Publish to npm
-npm publish --access public
 ```
 
----
+## 4. Automatic Publishing
+Once the tag is pushed:
+1. **GitHub Actions** will trigger the `Publish to NPM` workflow.
+2. The workflow runs the full suite of linting, building, and testing.
+3. If all checks pass, it will automatically publish the package to npm.
 
-## Automated Deployment (Future)
-Once a release tag is pushed, the GitHub Action can be extended to automatically publish to npm. For now, the manual `npm publish` step ensures a "human-in-the-loop" safety check.
+You can monitor the progress in the **Actions** tab of your GitHub repository.

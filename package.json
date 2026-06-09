@@ -9,38 +9,40 @@
 	"module": "./dist/index.js",
 	"types": "./dist/index.d.ts",
 	"files": [
-	  "dist",
-	  "README.md",
-	  "LICENSE"
+		"dist",
+		"README.md",
+		"LICENSE"
 	],
 	"exports": {
-	  ".": {
-	    "types": "./dist/index.d.ts",
-	    "import": "./dist/index.js"
-	  }
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.js"
+		}
 	},
 	"repository": {
-	  "type": "git",
-	  "url": "git+https://github.com/leadpixel/maxoptra.git"
+		"type": "git",
+		"url": "git+https://github.com/leadpixel/maxoptra.git"
 	},
 	"bugs": {
-	  "url": "https://github.com/leadpixel/maxoptra/issues"
+		"url": "https://github.com/leadpixel/maxoptra/issues"
 	},
 	"homepage": "https://github.com/leadpixel/maxoptra#readme",
 	"keywords": [
-	  "maxoptra",
-	  "api",
-	  "logistics",
-	  "route-optimization",
-	  "transport",
-	  "client",
-	  "typescript"
+		"maxoptra",
+		"api",
+		"logistics",
+		"route-optimization",
+		"transport",
+		"client",
+		"typescript"
 	],
 	"scripts": {
 		"test": "vitest run",
 		"build": "tsc",
 		"lint": "biome check .",
-		"format": "biome format --write ."
+		"format": "biome format --write .",
+		"preversion": "just pre-release",
+		"version": "tsx scripts/sync-version.ts && git add deno.json"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.4.16",
@@ -49,10 +51,10 @@
 		"@tsconfig/strictest": "^2.0.8",
 		"@types/node": "^25.9.1",
 		"@vitest/coverage-v8": "^4.1.8",
+		"tsx": "^4.22.4",
 		"typescript": "^6.0.3",
 		"vitest": "^4.1.8"
 	},
-	"types": "./dist/index.d.ts",
 	"dependencies": {
 		"zod": "^4.4.3"
 	}

@@ -224,6 +224,15 @@ MAXOPTRA_API_KEY=your-key MAXOPTRA_BASE_URL=https://your-domain.maxoptra.com/api
 
 These tests are read-only and will not modify any data.
 
+## Deployment
+
+This project uses **Continuous Deployment**. Every pull request merged into `main` is automatically:
+1. Validated (Lint, Build, E2E tests).
+2. Versioned (Automated patch bump).
+3. Published to **npm**.
+
+See [RELEASING.md](docs/RELEASING.md) for more details.
+
 ## Contributing
 
 Contributions are welcome. Please ensure your code follows the established linting and formatting standards.

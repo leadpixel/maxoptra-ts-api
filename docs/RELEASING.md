@@ -1,36 +1,31 @@
 # Releasing @leadpixel/maxoptra
 
-This project uses an automated "Push-to-Publish" pattern via GitHub Actions.
+This project uses a fully automated **Continuous Deployment (CD)** pipeline.
 
-## 1. Prerequisites
-- Ensure you have the `NPM_TOKEN` secret configured in your GitHub repository.
-- Your local `main` branch should be up to date.
+## 1. Verification (PR Phase)
+Every Pull Request must pass the `Verify PR` workflow, which runs:
+- Formatting checks (`biome format`)
+- Linting (`biome check`)
+- Type checking (`tsc`)
+- Unit tests (`vitest run tests/unit`)
 
-## 2. Release Command
-To trigger a release, use the `npm version` command. This will:
-1. Run pre-release checks.
-2. Bump the version in `package.json`.
-3. Synchronise the version in `deno.json`.
-4. Create a Git commit and a tag (e.g., `v1.0.1`).
+## 2. Deployment (Merge to Main)
+When a PR is merged into the `main` branch, the `Deploy to Main` workflow is triggered:
+1. **E2E Validation:** Runs the full test suite (including E2E tests against the mock server).
+2. **Auto-Versioning:** Automatically bumps the version (`patch`), synchronises `deno.json`, and creates a Git tag.
+3. **Publishing:** Automatically publishes the new version to **npm**.
 
-```bash
-# Choose the appropriate bump:
-npm version patch # 1.0.0 -> 1.0.1
-npm version minor # 1.0.0 -> 1.1.0
-npm version major # 1.0.0 -> 2.0.0
-```
-
-## 3. Push to GitHub
-Push the new commit and the tag to GitHub.
+## 3. Manual Releases (Optional)
+If you need to perform a **major** or **minor** release (not just a patch), you should run `npm version [major|minor]` locally and push the tags. The automation is designed to handle automated patches for standard merges.
 
 ```bash
+# Example for a manual minor release:
+npm version minor
 git push origin main --tags
 ```
 
-## 4. Automatic Publishing
-Once the tag is pushed:
-1. **GitHub Actions** will trigger the `Publish to NPM` workflow.
-2. The workflow runs the full suite of linting, building, and testing.
-3. If all checks pass, it will automatically publish the package to npm.
+---
 
-You can monitor the progress in the **Actions** tab of your GitHub repository.
+## Prerequisites for Automation
+- `NPM_TOKEN` must be set in GitHub Actions secrets.
+- `GITHUB_TOKEN` must have "Read and write permissions" (default in many setups).

@@ -1,15 +1,12 @@
-name: CI
+name: Verify PR
 
 on:
-  push:
-    branches: [ main ]
   pull_request:
     branches: [ main ]
 
 jobs:
-  build-and-test:
+  verify:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
 
@@ -35,7 +32,5 @@ jobs:
       - name: Type Check
         run: pnpm run build
 
-      - name: Run Tests
-        run: pnpm run test
-        env:
-          E2E: true # Run E2E tests against the Stoplight mock server
+      - name: Run Unit Tests
+        run: pnpm vitest run tests/unit

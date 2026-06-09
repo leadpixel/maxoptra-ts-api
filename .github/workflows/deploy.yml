@@ -1,0 +1,54 @@
+name: Deploy to Main
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    # Only deploy if it's not a version commit created by the bot
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    
+    permissions:
+      contents: write # Needed to push tags and version bumps
+    
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Needed for version bumping
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Use Node.js 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: 'https://registry.npmjs.org'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run E2E Tests (Mocked)
+        run: pnpm run test
+        env:
+          E2E: true
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Bump Version and Sync
+        run: |
+          npm version patch -m "chore: release %s [skip ci]"
+          git push origin main --follow-tags
+
+      - name: Publish to NPM
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

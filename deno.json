@@ -1,0 +1,15 @@
+{
+	"imports": {
+		"./client.ts": "./src/client.ts",
+		"./resources/async.ts": "./src/resources/async.ts",
+		"./resources/distributionCentres.ts": "./src/resources/distributionCentres.ts",
+		"./resources/drivers.ts": "./src/resources/drivers.ts",
+		"./resources/locations.ts": "./src/resources/locations.ts",
+		"./resources/orders.ts": "./src/resources/orders.ts",
+		"./resources/runs.ts": "./src/resources/runs.ts",
+		"./resources/schedule.ts": "./src/resources/schedule.ts",
+		"./resources/subscriptions.ts": "./src/resources/subscriptions.ts",
+		"./resources/vehicles.ts": "./src/resources/vehicles.ts",
+		"./schemas.ts": "./src/schemas.ts"
+	}
+}

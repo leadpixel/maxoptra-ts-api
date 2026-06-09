@@ -1,0 +1,29 @@
+{
+	"name": "@leadpixel/maxoptra",
+	"version": "1.0.0",
+	"description": "",
+	"license": "ISC",
+	"author": "",
+	"type": "module",
+	"main": "./dist/index.js",
+	"scripts": {
+		"test": "vitest run",
+		"build": "tsc",
+		"lint": "biome check .",
+		"format": "biome format --write ."
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.4.16",
+		"@tsconfig/node24": "^24.0.4",
+		"@tsconfig/recommended": "^1.0.13",
+		"@tsconfig/strictest": "^2.0.8",
+		"@types/node": "^25.9.1",
+		"@vitest/coverage-v8": "^4.1.8",
+		"typescript": "^6.0.3",
+		"vitest": "^4.1.8"
+	},
+	"types": "./dist/index.d.ts",
+	"dependencies": {
+		"zod": "^4.4.3"
+	}
+}

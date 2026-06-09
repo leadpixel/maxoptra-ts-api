@@ -1,0 +1,21 @@
+{
+	"extends": ["@tsconfig/strictest", "@tsconfig/node24"],
+	"compilerOptions": {
+		"outDir": "./dist",
+		"rootDir": "./src",
+		"module": "ESNext",
+		"moduleResolution": "Bundler",
+		"forceConsistentCasingInFileNames": true,
+		"types": ["node"],
+		"sourceMap": true,
+		"declaration": true,
+		"declarationMap": true,
+		"erasableSyntaxOnly": true,
+		"verbatimModuleSyntax": true,
+		"composite": true,
+		"allowImportingTsExtensions": true,
+		"emitDeclarationOnly": true
+	},
+	"include": ["src/**/*"],
+	"exclude": ["node_modules", "dist", "tests"]
+}

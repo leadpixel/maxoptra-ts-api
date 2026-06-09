@@ -21,11 +21,10 @@ export class MaxoptraError extends Error {
 
 	constructor(status: number, statusText: string, data: unknown) {
 		let message = statusText;
-
 		if (data && typeof data === "object") {
-			const d = data as Record<string, unknown>;
-			const errorVal = d["error"];
-			const messageVal = d["message"];
+			const d = data as { error?: unknown; message?: unknown };
+			const errorVal = d.error;
+			const messageVal = d.message;
 
 			if (typeof errorVal === "string") {
 				message = errorVal;
@@ -76,6 +75,7 @@ export class MaxoptraClient {
 			...options,
 			headers: {
 				"Content-Type": "application/json",
+				// biome-ignore lint/style/useNamingConvention: Standard HTTP header
 				Authorization: `Bearer ${this.apiKey}`,
 				...options.headers,
 			},

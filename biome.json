@@ -11,14 +11,27 @@
 		"rules": {
 			"recommended": true,
 			"complexity": {
-				"useLiteralKeys": "off"
+				"noExcessiveCognitiveComplexity": "error",
+				"useLiteralKeys": "error"
+			},
+			"correctness": {
+				"noUnusedVariables": "error",
+				"noUnusedImports": "error"
 			},
 			"style": {
-				"noDefaultExport": "off",
-				"noNonNullAssertion": "warn"
+				"noDefaultExport": "error",
+				"noNonNullAssertion": "error",
+				"noShoutyConstants": "error",
+				"useNamingConvention": {
+					"level": "error",
+					"options": {
+						"strictCase": false
+					}
+				}
 			},
 			"suspicious": {
-				"noExplicitAny": "warn"
+				"noExplicitAny": "error",
+				"noShadowRestrictedNames": "error"
 			}
 		}
 	},

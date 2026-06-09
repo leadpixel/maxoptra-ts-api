@@ -13,5 +13,17 @@
 		"./resources/subscriptions.ts": "./src/resources/subscriptions.ts",
 		"./resources/vehicles.ts": "./src/resources/vehicles.ts",
 		"./schemas.ts": "./src/schemas.ts"
+	},
+	"lint": {
+		"rules": {
+			"tags": ["recommended"]
+		}
+	},
+	"fmt": {
+		"useTabs": true,
+		"lineWidth": 100,
+		"indentWidth": 4,
+		"semiColons": true,
+		"singleQuote": false
 	}
 }

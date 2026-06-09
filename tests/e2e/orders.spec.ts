@@ -37,8 +37,8 @@ describeE2E("Orders (e2e)", () => {
 		expect(Array.isArray(response.data)).toBe(true);
 	});
 
-	it("gets POD for an order", async () => {
-		const pod = await client.orders.getPOD("ORD-123");
+	it("gets Pod for an order", async () => {
+		const pod = await client.orders.getPod("ORD-123");
 		expect(typeof pod).toBe("object");
 	});
 

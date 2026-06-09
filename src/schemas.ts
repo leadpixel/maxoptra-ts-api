@@ -10,13 +10,13 @@ export const withDataArray = <T extends z.ZodTypeAny>(schema: T) =>
 
 // ── Query parameters ─────────────────────────────────────────────────
 
-export const QueryParams = z.record(z.string(), z.any());
+export const QueryParams = z.record(z.string(), z.unknown());
 export type QueryParams = z.infer<typeof QueryParams>;
 
 export const JsonPatchOperationSchema = z.object({
 	op: z.enum(["add", "remove", "replace", "copy", "move", "test"]),
 	path: z.string(),
-	value: z.any().optional(),
+	value: z.unknown().optional(),
 	from: z.string().optional(),
 });
 export type JsonPatchOperation = z.infer<typeof JsonPatchOperationSchema>;
@@ -246,6 +246,7 @@ export const OrderItemsResponseSchema = withData(
 		orderItems: z.array(OrderItemSchema),
 		plannedItemsCount: z.number(),
 		factItemsCount: z.number(),
+		// biome-ignore lint/style/useNamingConvention: API defined field
 		ItemsStatus: z.string(),
 	}),
 );
@@ -276,7 +277,7 @@ export const WidgetSchema = withData(
 );
 export type Widget = z.infer<typeof WidgetSchema>;
 
-export const PODSchema = withData(
+export const PodSchema = withData(
 	z.object({
 		orderReferenceNumber: z.string(),
 		signatoryName: z.string().optional(),
@@ -284,7 +285,7 @@ export const PODSchema = withData(
 		signatureImage: z.string().optional(),
 	}),
 );
-export type POD = z.infer<typeof PODSchema>;
+export type Pod = z.infer<typeof PodSchema>;
 
 export const TrackingInfoSchema = withData(
 	z.object({
@@ -427,6 +428,7 @@ export const VehicleSchema = z.object({
 	territoriesReferences: z.array(z.string()).optional(),
 	comment: z.string().optional(),
 	manufacturer: z.string().optional(),
+	// biome-ignore lint/style/useNamingConvention: API defined field
 	VIN: z.string().optional(),
 	isStandDown: z.boolean().optional(),
 	isArchived: z.boolean().optional(),

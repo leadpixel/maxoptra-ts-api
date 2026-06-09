@@ -13,8 +13,8 @@ import {
 	OrderSchema,
 	type PaginatedOrders,
 	PaginatedOrdersSchema,
-	type POD,
-	PODSchema,
+	type Pod,
+	PodSchema,
 	type TrackingInfo,
 	TrackingInfoSchema,
 	toReplacePatch,
@@ -112,8 +112,8 @@ export class OrdersApi {
 		return this.client.request(`/orders/${referenceNumber}/loading`, {}, OrderLoadingSchema);
 	}
 
-	async getPOD(referenceNumber: string): Promise<POD> {
-		return this.client.request(`/orders/${referenceNumber}/pod`, {}, PODSchema);
+	async getPod(referenceNumber: string): Promise<Pod> {
+		return this.client.request(`/orders/${referenceNumber}/pod`, {}, PodSchema);
 	}
 
 	async getTrackingInfo(referenceNumber: string): Promise<TrackingInfo> {

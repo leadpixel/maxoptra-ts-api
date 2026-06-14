@@ -295,7 +295,8 @@ export const TrackingInfoSchema = withData(
 				latitude: z.number(),
 				longitude: z.number(),
 			})
-			.nullable().optional(),
+			.nullable()
+			.optional(),
 		status: z.string(),
 	}),
 );
@@ -310,9 +311,11 @@ export const OrderDeleteResponseSchema = z
 				details: z.string(),
 				field: z.string(),
 			})
-			.nullable().optional(),
+			.nullable()
+			.optional(),
 	})
-	.nullable().optional();
+	.nullable()
+	.optional();
 export type OrderDeleteResponse = z.infer<typeof OrderDeleteResponseSchema>;
 
 // ── Drivers ──────────────────────────────────────────────────────────
@@ -368,7 +371,8 @@ export const DriverSchema = z.object({
 				endTime: z.string(),
 			}),
 		)
-		.nullable().optional(),
+		.nullable()
+		.optional(),
 });
 export type Driver = z.infer<typeof DriverSchema>;
 

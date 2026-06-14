@@ -1,3 +1,5 @@
+set dotenv-load
+
 [private]
 default:
     @just --list
@@ -26,3 +28,7 @@ pre-release: lint build test
 # Clean build artifacts
 clean:
     rm -rf dist
+
+# Start an interactive Node.js REPL with the Maxoptra client pre-loaded
+repl:
+    pnpm exec tsx scripts/repl.ts

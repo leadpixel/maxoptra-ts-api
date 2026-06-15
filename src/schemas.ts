@@ -16,8 +16,8 @@ export type QueryParams = z.infer<typeof QueryParams>;
 export const JsonPatchOperationSchema = z.object({
 	op: z.enum(["add", "remove", "replace", "copy", "move", "test"]),
 	path: z.string(),
-	value: z.unknown().optional(),
-	from: z.string().optional(),
+	value: z.unknown().nullable().optional(),
+	from: z.string().nullable().optional(),
 });
 export type JsonPatchOperation = z.infer<typeof JsonPatchOperationSchema>;
 
@@ -51,8 +51,8 @@ export const SubscriptionSchema = z.object({
 	reference: z.string(),
 	event: z.string(),
 	url: z.string(),
-	filterStatus: z.string().optional(),
-	filterRunStatus: z.string().optional(),
+	filterStatus: z.string().nullable().optional(),
+	filterRunStatus: z.string().nullable().optional(),
 	enabled: z.boolean(),
 });
 export type Subscription = z.infer<typeof SubscriptionSchema>;
@@ -62,16 +62,16 @@ export const SubscriptionsListSchema = withDataArray(SubscriptionSchema);
 export const SubscriptionCreateSchema = z.object({
 	event: z.string(),
 	url: z.string(),
-	headers: z.record(z.string(), z.string()).optional(),
+	headers: z.record(z.string(), z.string()).nullable().optional(),
 });
 export type SubscriptionCreateRequest = z.infer<typeof SubscriptionCreateSchema>;
 
 export const SubscriptionUpdateSchema = z.object({
-	event: z.string().optional(),
-	url: z.string().optional(),
-	headers: z.record(z.string(), z.string()).optional(),
-	enabled: z.boolean().optional(),
-	status: z.string().optional(),
+	event: z.string().nullable().optional(),
+	url: z.string().nullable().optional(),
+	headers: z.record(z.string(), z.string()).nullable().optional(),
+	enabled: z.boolean().nullable().optional(),
+	status: z.string().nullable().optional(),
 });
 export type SubscriptionUpdateRequest = z.infer<typeof SubscriptionUpdateSchema>;
 
@@ -136,8 +136,8 @@ export const PaginatedOrdersSchema = z.object({
 export type PaginatedOrders = z.infer<typeof PaginatedOrdersSchema>;
 
 const NotificationPreferencesSchema = z.object({
-	allowSMS: z.boolean().optional(),
-	allowEmail: z.boolean().optional(),
+	allowSMS: z.boolean().nullable().optional(),
+	allowEmail: z.boolean().nullable().optional(),
 });
 
 const TimeWindowSchema = z.object({
@@ -147,52 +147,52 @@ const TimeWindowSchema = z.object({
 
 export const OrderItemSchema = z.object({
 	itemReferenceNumber: z.string(),
-	orderReferenceNumber: z.string().optional(),
-	name: z.string().optional(),
-	description: z.string().optional(),
-	barcode: z.string().optional(),
-	type: z.string().optional(),
-	status: z.string().optional(),
-	rejectReason: z.string().optional(),
-	rejectComment: z.string().optional(),
-	pricePerUnit: z.number().optional(),
+	orderReferenceNumber: z.string().nullable().optional(),
+	name: z.string().nullable().optional(),
+	description: z.string().nullable().optional(),
+	barcode: z.string().nullable().optional(),
+	type: z.string().nullable().optional(),
+	status: z.string().nullable().optional(),
+	rejectReason: z.string().nullable().optional(),
+	rejectComment: z.string().nullable().optional(),
+	pricePerUnit: z.number().nullable().optional(),
 	plannedQuantity: z.number(),
-	factQuantity: z.number().optional(),
-	totalAmount: z.number().optional(),
-	height: z.number().optional(),
-	width: z.number().optional(),
-	length: z.number().optional(),
-	weight: z.number().optional(),
-	volume: z.number().optional(),
+	factQuantity: z.number().nullable().optional(),
+	totalAmount: z.number().nullable().optional(),
+	height: z.number().nullable().optional(),
+	width: z.number().nullable().optional(),
+	length: z.number().nullable().optional(),
+	weight: z.number().nullable().optional(),
+	volume: z.number().nullable().optional(),
 });
 export type OrderItem = z.infer<typeof OrderItemSchema>;
 
 export const OrderSchema = z.object({
 	referenceNumber: z.string(),
-	consignmentReference: z.string().optional(),
+	consignmentReference: z.string().nullable().optional(),
 	distributionCentreReference: z.string(),
-	distributionCentreName: z.string().optional(),
-	task: z.enum(["DELIVERY", "COLLECTION"]).optional(),
-	priority: z.enum(["NORMAL", "MEDIUM", "HIGH"]).optional(),
-	vehicleRequirements: z.array(z.string()).optional(),
-	additionalInstructions: z.string().optional(),
-	clientName: z.string().optional(),
-	contactPerson: z.string().optional(),
-	contactNumber: z.string().optional(),
-	contactEmail: z.string().optional(),
-	additionalContactEmails: z.array(z.string()).optional(),
-	notificationPreferences: NotificationPreferencesSchema.optional(),
+	distributionCentreName: z.string().nullable().optional(),
+	task: z.enum(["DELIVERY", "COLLECTION"]).nullable().optional(),
+	priority: z.enum(["NORMAL", "MEDIUM", "HIGH"]).nullable().optional(),
+	vehicleRequirements: z.array(z.string()).nullable().optional(),
+	additionalInstructions: z.string().nullable().optional(),
+	clientName: z.string().nullable().optional(),
+	contactPerson: z.string().nullable().optional(),
+	contactNumber: z.string().nullable().optional(),
+	contactEmail: z.string().nullable().optional(),
+	additionalContactEmails: z.array(z.string()).nullable().optional(),
+	notificationPreferences: NotificationPreferencesSchema.nullable().optional(),
 	customerLocation: CustomerLocationSchema,
-	territoryReference: z.string().optional(),
-	stopSequence: z.string().optional(),
-	timeWindows: z.array(TimeWindowSchema).optional(),
+	territoryReference: z.string().nullable().optional(),
+	stopSequence: z.string().nullable().optional(),
+	timeWindows: z.array(TimeWindowSchema).nullable().optional(),
 	orderDate: z.string(),
-	capacity1: z.number().optional(),
-	capacity2: z.number().optional(),
-	price: z.number().optional(),
-	operationDuration: z.number().optional(),
-	customFields: z.record(z.string(), z.string()).optional(),
-	orderItems: z.array(OrderItemSchema).optional(),
+	capacity1: z.number().nullable().optional(),
+	capacity2: z.number().nullable().optional(),
+	price: z.number().nullable().optional(),
+	operationDuration: z.number().nullable().optional(),
+	customFields: z.record(z.string(), z.string()).nullable().optional(),
+	orderItems: z.array(OrderItemSchema).nullable().optional(),
 });
 export type Order = z.infer<typeof OrderSchema>;
 
@@ -206,7 +206,7 @@ export const OrderAttachmentsSchema = withData(
 			z.object({
 				attachmentReferenceNumber: z.string(),
 				orderReferenceNumber: z.string(),
-				comment: z.string().optional(),
+				comment: z.string().nullable().optional(),
 				imageSmall: z.string(),
 				imageFull: z.string(),
 			}),
@@ -218,23 +218,23 @@ export type OrderAttachments = z.infer<typeof OrderAttachmentsSchema>;
 export const OrderExecutionSchema = withData(
 	z.object({
 		orderReferenceNumber: z.string(),
-		assignedDriverReference: z.string().optional(),
-		assignedDriverName: z.string().optional(),
-		assignedVehicleReference: z.string().optional(),
-		assignedVehicleName: z.string().optional(),
-		plannedArrivalTime: z.string().optional(),
-		plannedCompletionTime: z.string().optional(),
-		stopNumber: z.number().optional(),
-		totalStopsInRun: z.number().optional(),
-		runNumber: z.number().optional(),
-		runReference: z.string().optional(),
-		eta: z.string().optional(),
-		factArrivalTimeGPS: z.string().optional(),
-		factCompletionTimeGPS: z.string().optional(),
-		factArrivalTimeReported: z.string().optional(),
-		factCompletionTimeReported: z.string().optional(),
-		failReason: z.string().optional(),
-		failComment: z.string().optional(),
+		assignedDriverReference: z.string().nullable().optional(),
+		assignedDriverName: z.string().nullable().optional(),
+		assignedVehicleReference: z.string().nullable().optional(),
+		assignedVehicleName: z.string().nullable().optional(),
+		plannedArrivalTime: z.string().nullable().optional(),
+		plannedCompletionTime: z.string().nullable().optional(),
+		stopNumber: z.number().nullable().optional(),
+		totalStopsInRun: z.number().nullable().optional(),
+		runNumber: z.number().nullable().optional(),
+		runReference: z.string().nullable().optional(),
+		eta: z.string().nullable().optional(),
+		factArrivalTimeGPS: z.string().nullable().optional(),
+		factCompletionTimeGPS: z.string().nullable().optional(),
+		factArrivalTimeReported: z.string().nullable().optional(),
+		factCompletionTimeReported: z.string().nullable().optional(),
+		failReason: z.string().nullable().optional(),
+		failComment: z.string().nullable().optional(),
 		status: z.string(),
 	}),
 );
@@ -258,8 +258,8 @@ export const OrderLoadingSchema = withData(
 		orderLoadingStatus: z.string(),
 		orderItemsLoading: z.array(
 			z.object({
-				name: z.string().optional(),
-				barcode: z.string().optional(),
+				name: z.string().nullable().optional(),
+				barcode: z.string().nullable().optional(),
 				quantity: z.number(),
 				loadedQuantity: z.number(),
 				loadingStatus: z.string(),
@@ -280,9 +280,9 @@ export type Widget = z.infer<typeof WidgetSchema>;
 export const PodSchema = withData(
 	z.object({
 		orderReferenceNumber: z.string(),
-		signatoryName: z.string().optional(),
-		signatureTime: z.string().optional(),
-		signatureImage: z.string().optional(),
+		signatoryName: z.string().nullable().optional(),
+		signatureTime: z.string().nullable().optional(),
+		signatureImage: z.string().nullable().optional(),
 	}),
 );
 export type Pod = z.infer<typeof PodSchema>;
@@ -295,6 +295,7 @@ export const TrackingInfoSchema = withData(
 				latitude: z.number(),
 				longitude: z.number(),
 			})
+			.nullable()
 			.optional(),
 		status: z.string(),
 	}),
@@ -310,8 +311,10 @@ export const OrderDeleteResponseSchema = z
 				details: z.string(),
 				field: z.string(),
 			})
+			.nullable()
 			.optional(),
 	})
+	.nullable()
 	.optional();
 export type OrderDeleteResponse = z.infer<typeof OrderDeleteResponseSchema>;
 
@@ -340,44 +343,45 @@ export type DriversList = z.infer<typeof DriversListSchema>;
 export const DriverSchema = z.object({
 	referenceNumber: z.string(),
 	name: z.string(),
-	comment: z.string().optional(),
-	telephone: z.string().optional(),
-	assignedVehicleReference: z.string().optional(),
-	assignedVehicleName: z.string().optional(),
-	costPerHour: z.number().optional(),
-	distributionCentreReference: z.string().optional(),
-	distributionCentreName: z.string().optional(),
-	territories: z.array(z.string()).optional(),
-	startOfDayLocation: z.string().optional(),
-	startOfDayAddress: z.string().optional(),
-	visitDistributionCentreStart: z.string().optional(),
-	endOfDayLocation: z.string().optional(),
-	endOfDayAddress: z.string().optional(),
-	visitDistributionCentreEnd: z.string().optional(),
-	drivingLimit: z.number().optional(),
-	runDurationLimit: z.number().optional(),
-	dutyTimeLimit: z.number().optional(),
+	comment: z.string().nullable().optional(),
+	telephone: z.string().nullable().optional(),
+	assignedVehicleReference: z.string().nullable().optional(),
+	assignedVehicleName: z.string().nullable().optional(),
+	costPerHour: z.number().nullable().optional(),
+	distributionCentreReference: z.string().nullable().optional(),
+	distributionCentreName: z.string().nullable().optional(),
+	territories: z.array(z.string()).nullable().optional(),
+	startOfDayLocation: z.string().nullable().optional(),
+	startOfDayAddress: z.string().nullable().optional(),
+	visitDistributionCentreStart: z.string().nullable().optional(),
+	endOfDayLocation: z.string().nullable().optional(),
+	endOfDayAddress: z.string().nullable().optional(),
+	visitDistributionCentreEnd: z.string().nullable().optional(),
+	drivingLimit: z.number().nullable().optional(),
+	runDurationLimit: z.number().nullable().optional(),
+	dutyTimeLimit: z.number().nullable().optional(),
 	availability: z
 		.record(
 			z.string(),
 			z.object({
-				startDay: z.string().optional(),
+				startDay: z.string().nullable().optional(),
 				startTime: z.string(),
-				rigidStart: z.boolean().optional(),
-				endDay: z.string().optional(),
+				rigidStart: z.boolean().nullable().optional(),
+				endDay: z.string().nullable().optional(),
 				endTime: z.string(),
 			}),
 		)
+		.nullable()
 		.optional(),
 });
 export type Driver = z.infer<typeof DriverSchema>;
 
 export const DriverCreateSchema = z.object({
 	name: z.string(),
-	telephone: z.string().optional(),
-	assignedVehicleReference: z.string().optional(),
-	distributionCentreReference: z.string().optional(),
-	costPerHour: z.number().optional(),
+	telephone: z.string().nullable().optional(),
+	assignedVehicleReference: z.string().nullable().optional(),
+	distributionCentreReference: z.string().nullable().optional(),
+	costPerHour: z.number().nullable().optional(),
 });
 export type DriverCreateRequest = z.infer<typeof DriverCreateSchema>;
 
@@ -408,41 +412,41 @@ export type VehiclesList = z.infer<typeof VehiclesListSchema>;
 
 export const VehicleSchema = z.object({
 	referenceNumber: z.string(),
-	name: z.string().optional(),
-	assignedDevice: z.string().optional(),
-	trackingSource: z.string().optional(),
-	vehicleRequirementsReferences: z.array(z.string()).optional(),
-	vehicleTypeReference: z.string().optional(),
-	maxSpeed: z.number().optional(),
-	drivingTimeCorrectionFactor: z.number().optional(),
-	costPerDistance: z.number().optional(),
-	activationCost: z.number().optional(),
-	costPerOrder: z.number().optional(),
-	capacity1: z.number().optional(),
-	capacity2: z.number().optional(),
-	runDistanceLimit: z.number().optional(),
-	distributionCentreReference: z.string().optional(),
-	distributionCentreName: z.string().optional(),
-	assignedDriverReference: z.string().optional(),
-	assignedDriverName: z.string().optional(),
-	territoriesReferences: z.array(z.string()).optional(),
-	comment: z.string().optional(),
-	manufacturer: z.string().optional(),
+	name: z.string().nullable().optional(),
+	assignedDevice: z.string().nullable().optional(),
+	trackingSource: z.string().nullable().optional(),
+	vehicleRequirementsReferences: z.array(z.string()).nullable().optional(),
+	vehicleTypeReference: z.string().nullable().optional(),
+	maxSpeed: z.number().nullable().optional(),
+	drivingTimeCorrectionFactor: z.number().nullable().optional(),
+	costPerDistance: z.number().nullable().optional(),
+	activationCost: z.number().nullable().optional(),
+	costPerOrder: z.number().nullable().optional(),
+	capacity1: z.number().nullable().optional(),
+	capacity2: z.number().nullable().optional(),
+	runDistanceLimit: z.number().nullable().optional(),
+	distributionCentreReference: z.string().nullable().optional(),
+	distributionCentreName: z.string().nullable().optional(),
+	assignedDriverReference: z.string().nullable().optional(),
+	assignedDriverName: z.string().nullable().optional(),
+	territoriesReferences: z.array(z.string()).nullable().optional(),
+	comment: z.string().nullable().optional(),
+	manufacturer: z.string().nullable().optional(),
 	// biome-ignore lint/style/useNamingConvention: API defined field
-	VIN: z.string().optional(),
-	isStandDown: z.boolean().optional(),
-	isArchived: z.boolean().optional(),
-	color: z.string().optional(),
+	VIN: z.string().nullable().optional(),
+	isStandDown: z.boolean().nullable().optional(),
+	isArchived: z.boolean().nullable().optional(),
+	color: z.string().nullable().optional(),
 });
 export type Vehicle = z.infer<typeof VehicleSchema>;
 
 export const VehicleCreateSchema = z.object({
 	referenceNumber: z.string(),
-	name: z.string().optional(),
-	capacity1: z.number().optional(),
-	capacity2: z.number().optional(),
-	distributionCentreReference: z.string().optional(),
-	vehicleTypeReference: z.string().optional(),
+	name: z.string().nullable().optional(),
+	capacity1: z.number().nullable().optional(),
+	capacity2: z.number().nullable().optional(),
+	distributionCentreReference: z.string().nullable().optional(),
+	vehicleTypeReference: z.string().nullable().optional(),
 });
 export type VehicleCreateRequest = z.infer<typeof VehicleCreateSchema>;
 
@@ -475,14 +479,14 @@ export const LocationsListSchema = z.object({
 export type LocationsList = z.infer<typeof LocationsListSchema>;
 
 const LocationSettingsSchema = z.object({
-	allowSMS: z.boolean().optional(),
-	allowEmail: z.boolean().optional(),
-	fixedTimePerAddress: z.number().optional(),
-	fixedTimePerOrder: z.number().optional(),
-	timePerCapacityDelivery: z.number().optional(),
-	preferredDriverReferences: z.array(z.string()).optional(),
-	preferredDriverNames: z.array(z.string()).optional(),
-	vehicleRequirementsReferences: z.array(z.string()).optional(),
+	allowSMS: z.boolean().nullable().optional(),
+	allowEmail: z.boolean().nullable().optional(),
+	fixedTimePerAddress: z.number().nullable().optional(),
+	fixedTimePerOrder: z.number().nullable().optional(),
+	timePerCapacityDelivery: z.number().nullable().optional(),
+	preferredDriverReferences: z.array(z.string()).nullable().optional(),
+	preferredDriverNames: z.array(z.string()).nullable().optional(),
+	vehicleRequirementsReferences: z.array(z.string()).nullable().optional(),
 });
 
 const DayTimeWindowSchema = z.object({
@@ -492,41 +496,41 @@ const DayTimeWindowSchema = z.object({
 
 export const LocationSchema = z.object({
 	referenceNumber: z.string(),
-	name: z.string().optional(),
+	name: z.string().nullable().optional(),
 	address: z.string(),
-	w3wAddress: z.string().optional(),
-	postcode: z.string().optional(),
-	latitude: z.number().optional(),
-	longitude: z.number().optional(),
-	clientName: z.string().optional(),
-	isVerified: z.boolean().optional(),
-	isValid: z.boolean().optional(),
-	created: z.string().optional(),
-	updated: z.string().optional(),
-	description: z.string().optional(),
-	primaryTelephone: z.string().optional(),
-	secondaryTelephone: z.string().optional(),
-	email: z.string().optional(),
-	website: z.string().optional(),
-	settings: LocationSettingsSchema.optional(),
-	availability: z.record(z.string(), DayTimeWindowSchema).optional(),
+	w3wAddress: z.string().nullable().optional(),
+	postcode: z.string().nullable().optional(),
+	latitude: z.number().nullable().optional(),
+	longitude: z.number().nullable().optional(),
+	clientName: z.string().nullable().optional(),
+	isVerified: z.boolean().nullable().optional(),
+	isValid: z.boolean().nullable().optional(),
+	created: z.string().nullable().optional(),
+	updated: z.string().nullable().optional(),
+	description: z.string().nullable().optional(),
+	primaryTelephone: z.string().nullable().optional(),
+	secondaryTelephone: z.string().nullable().optional(),
+	email: z.string().nullable().optional(),
+	website: z.string().nullable().optional(),
+	settings: LocationSettingsSchema.nullable().optional(),
+	availability: z.record(z.string(), DayTimeWindowSchema).nullable().optional(),
 });
 export type Location = z.infer<typeof LocationSchema>;
 
 export const LocationCreateSchema = z.object({
 	referenceNumber: z.string(),
-	name: z.string().optional(),
+	name: z.string().nullable().optional(),
 	address: z.string(),
-	w3wAddress: z.string().optional(),
-	postcode: z.string().optional(),
-	latitude: z.number().optional(),
-	longitude: z.number().optional(),
-	clientName: z.string().optional(),
-	description: z.string().optional(),
-	primaryTelephone: z.string().optional(),
-	secondaryTelephone: z.string().optional(),
-	email: z.string().optional(),
-	website: z.string().optional(),
+	w3wAddress: z.string().nullable().optional(),
+	postcode: z.string().nullable().optional(),
+	latitude: z.number().nullable().optional(),
+	longitude: z.number().nullable().optional(),
+	clientName: z.string().nullable().optional(),
+	description: z.string().nullable().optional(),
+	primaryTelephone: z.string().nullable().optional(),
+	secondaryTelephone: z.string().nullable().optional(),
+	email: z.string().nullable().optional(),
+	website: z.string().nullable().optional(),
 });
 export type LocationCreateRequest = z.infer<typeof LocationCreateSchema>;
 
@@ -535,7 +539,7 @@ export type LocationCreateRequest = z.infer<typeof LocationCreateSchema>;
 export const DistributionCentreSchema = z.object({
 	referenceNumber: z.string(),
 	name: z.string(),
-	address: z.string().optional(),
+	address: z.string().nullable().optional(),
 });
 export type DistributionCentre = z.infer<typeof DistributionCentreSchema>;
 
@@ -569,48 +573,48 @@ export type RunLoadingInfo = z.infer<typeof RunLoadingInfoSchema>;
 
 const AllocationSchema = z.object({
 	orderReference: z.string(),
-	customerLocationName: z.string().optional(),
-	customerLocationAddress: z.string().optional(),
-	latitude: z.number().optional(),
-	longitude: z.number().optional(),
-	plannedDrivingStartTime: z.string().optional(),
-	plannedArrivalTime: z.string().optional(),
-	plannedCompletionTime: z.string().optional(),
+	customerLocationName: z.string().nullable().optional(),
+	customerLocationAddress: z.string().nullable().optional(),
+	latitude: z.number().nullable().optional(),
+	longitude: z.number().nullable().optional(),
+	plannedDrivingStartTime: z.string().nullable().optional(),
+	plannedArrivalTime: z.string().nullable().optional(),
+	plannedCompletionTime: z.string().nullable().optional(),
 	status: z.string(),
-	sequenceNumber: z.number().optional(),
-	task: z.string().optional(),
+	sequenceNumber: z.number().nullable().optional(),
+	task: z.string().nullable().optional(),
 });
 
 const RunSchema = z.object({
-	plannedLoadingStartTime: z.string().optional(),
-	plannedDepartureTime: z.string().optional(),
-	plannedReturnStartTime: z.string().optional(),
-	plannedCompletionTime: z.string().optional(),
-	totalOrders: z.number().optional(),
-	totalDuration: z.number().optional(),
-	totalDistance: z.number().optional(),
-	totalCapacity1: z.number().optional(),
-	totalCapacity2: z.number().optional(),
-	allocations: z.array(AllocationSchema).optional(),
-	isLocked: z.boolean().optional(),
+	plannedLoadingStartTime: z.string().nullable().optional(),
+	plannedDepartureTime: z.string().nullable().optional(),
+	plannedReturnStartTime: z.string().nullable().optional(),
+	plannedCompletionTime: z.string().nullable().optional(),
+	totalOrders: z.number().nullable().optional(),
+	totalDuration: z.number().nullable().optional(),
+	totalDistance: z.number().nullable().optional(),
+	totalCapacity1: z.number().nullable().optional(),
+	totalCapacity2: z.number().nullable().optional(),
+	allocations: z.array(AllocationSchema).nullable().optional(),
+	isLocked: z.boolean().nullable().optional(),
 	reference: z.string(),
-	runNumber: z.number().optional(),
-	totalDeliveries: z.number().optional(),
-	totalCollections: z.number().optional(),
+	runNumber: z.number().nullable().optional(),
+	totalDeliveries: z.number().nullable().optional(),
+	totalCollections: z.number().nullable().optional(),
 });
 
 const DriverShiftSchema = z.object({
 	driverName: z.string(),
 	driverReference: z.string(),
-	vehicleName: z.string().optional(),
+	vehicleName: z.string().nullable().optional(),
 	vehicleReference: z.string(),
 	shiftDate: z.string(),
 	shiftStartTime: z.string(),
 	shiftEndTime: z.string(),
 	runs: z.array(RunSchema),
-	totalWorkingTime: z.number().optional(),
-	totalDrivingTime: z.number().optional(),
-	totalDistance: z.number().optional(),
+	totalWorkingTime: z.number().nullable().optional(),
+	totalDrivingTime: z.number().nullable().optional(),
+	totalDistance: z.number().nullable().optional(),
 });
 
 export const ScheduleResponseSchema = z.object({

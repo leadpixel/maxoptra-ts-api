@@ -199,6 +199,32 @@ just build
 # Lint
 just lint
 
+# Interactive REPL
+just repl
+
+### Interactive REPL
+
+The project includes an interactive Node.js REPL pre-configured with the Maxoptra client. This is useful for quickly exploring the API or debugging issues.
+
+To use it, ensure you have your environment variables set (e.g., via a `.env` file):
+
+```bash
+MAXOPTRA_API_KEY=your-api-key
+MAXOPTRA_BASE_URL=https://your-domain.maxoptra.com/api/v6
+```
+
+Then run:
+
+```bash
+just repl
+```
+
+Once inside, you can access a pre-initialised `client` instance:
+
+```javascript
+> await client.drivers.list()
+```
+
 # Format
 just format
 
